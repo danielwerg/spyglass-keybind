@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "${name}",
+  "description": "${description}",
+  "authors": ["${authors}"],
+  "contact": {
+    "homepage": "${homepage}",
+    "sources": "${source}",
+    "issues": "${issues}"
+  },
+  "license": "${license}",
+  "icon": "assets/spyglass_keybind/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "me.danielwerg.spyglass_keybind.fabric.client.SpyglassKeybindFabricClient"
+    ]
+  },
+  "mixins": [
+    "spyglass_keybind.common.mixins.json",
+    "spyglass_keybind.fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "minecraft": ">=1.21 <1.22",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "trinkets": "*",
+    "accessories": "*"
+  }
+}

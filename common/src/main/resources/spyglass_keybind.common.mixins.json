@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "me.danielwerg.spyglass_keybind.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+    "KeyBindingInvoker",
+    "MinecraftClientInvoker",
+    "MinecraftClientMixin",
+    "PlayerEntityMixin"
+  ],
+  "mixins": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
