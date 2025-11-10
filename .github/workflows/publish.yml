@@ -1,4 +1,4 @@
-name: Publish Spylgass Keybind to Modrinth
+name: Publish Spyglass Keybind to Modrinth
 
 on:
   workflow_dispatch:
