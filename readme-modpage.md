@@ -2,39 +2,16 @@
 
 Spyglass Keybind is a simple Minecraft mod that adds keybind (`Z` by default) for Spyglass quick access. Recommended to use along with [Spyglass Astronomy](https://modrinth.com/mod/spyglass-astronomy) for zooming functionality.
 
-<!-- MODRINTH_BADGE:START -->
-[![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/spyglass-keybind)<!-- MODRINTH_BADGE:END -->
 [![codeberg](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/codeberg_vector.svg)](https://codeberg.org/danielwerg/spyglass-keybind)
 [![github](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/github_vector.svg)](https://github.com/danielwerg/spyglass-keybind)
 
-![](./gallery/setting_controls.png)
-![](./gallery/demo.gif)
+![](https://raw.githubusercontent.com/danielwerg/spyglass-keybind/master/gallery/setting_controls.png)
+![](https://raw.githubusercontent.com/danielwerg/spyglass-keybind/master/gallery/demo.gif)
 
 ## Installation
 
 This mod requires [Fabric](https://fabricmc.net/use/) and [Fabric API](https://modrinth.com/mod/fabric-api). You can download Spyglass Keybind from the [Modrinth](https://modrinth.com/mod/spyglass-keybind).
 Drop the mod and Fabric API `jar` files inside the mods folder.
-
-<!-- BUILD:START -->
-## Building from source
-
-### Unix
-
-```sh
-git clone https://github.com/daniewerg/spyglass-keybind/
-cd spyglass-improvements
-./gradlew clean build
-```
-
-### Windows
-
-```shell script
-git clone https://github.com/daniewerg/spyglass-keybind/
-cd spyglass-improvements
-gradlew build
-```
-You can find the built JARs inside `./spyglass-keybind/fabric/build/libs`, ignore `*-dev-shadow|*-sources` files.
-<!-- BUILD:END -->
 
 ## Credit
 

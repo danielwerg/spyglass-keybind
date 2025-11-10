@@ -16,32 +16,43 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Minecraft.class)
 public class MinecraftClientMixin {
 
-    @Shadow static Minecraft instance;
+  @Shadow
+  static Minecraft instance;
 
-    @Shadow @Nullable public LocalPlayer player;
+  @Shadow
+  @Nullable
+  public LocalPlayer player;
 
-    @ModifyExpressionValue(method = "handleKeybinds", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/KeyMapping;isDown()Z", ordinal = 2))
-    public boolean handleInput(boolean original) {
-        return original || SpyglassKeybindClient.useSpyglass.isDown();
+  @ModifyExpressionValue(method = "handleKeybinds", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/KeyMapping;isDown()Z", ordinal = 2))
+  public boolean handleInput(boolean original) {
+    return original || SpyglassKeybindClient.useSpyglass.isDown();
+  }
+
+  @Inject(method = "handleKeybinds", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;releaseUsingItem(Lnet/minecraft/world/entity/player/Player;)V"))
+  public void stopUsing(CallbackInfo ci) {
+    if (player == null)
+      return;
+
+    // When stop using, reset spyglass position if it was changed.
+    if (SpyglassKeybindClient.useSpyglass.consumeClick()
+        || SpyglassKeybindClient.interrupted) {
+      ((KeyBindingInvoker) SpyglassKeybindClient.useSpyglass).invokeReset();
+
+      int spyglassSlot = SpyglassKeybindClient.spyglassSlot;
+      int originalHotbarSelectedSlot = SpyglassKeybindClient.originalHotbarSelectedSlot;
+
+      if (spyglassSlot >= 0 && spyglassSlot <= 8
+          && player.getMainHandItem().getItem().equals(Items.SPYGLASS)) {
+        // from hotbar and not main hand
+        player.getInventory().setSelectedSlot(originalHotbarSelectedSlot);
+      } else if (spyglassSlot >= 9 && spyglassSlot <= 35) {
+        // from inventory
+        if (instance.gameMode == null)
+          return;
+
+        instance.gameMode.handleInventoryMouseClick(
+            0, spyglassSlot, 40, ClickType.SWAP, player);
+      }
     }
-    
-    @Inject(method = "handleKeybinds", at = @At(value = "INVOKE",shift = At.Shift.AFTER, target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;releaseUsingItem(Lnet/minecraft/world/entity/player/Player;)V"))
-    public void stopUsing(CallbackInfo ci) {
-        if (player == null)
-            return;
-
-        // When stop using, reset spyglass position if it was changed.
-        if (SpyglassKeybindClient.useSpyglass.consumeClick()) {
-            ((KeyBindingInvoker) SpyglassKeybindClient.useSpyglass).invokeReset();
-            int slot = SpyglassKeybindClient.slot;
-            if (player.getOffhandItem().getItem().equals(Items.SPYGLASS)) {
-                if (slot > 8 && instance.gameMode != null) {
-                    instance.gameMode.handleInventoryMouseClick(0, slot, 40, ClickType.SWAP, player);
-                    SpyglassKeybindClient.slot = -1;
-                }
-            } else if (slot >= 0 && slot <= 8) {
-                player.getInventory().setSelectedSlot(slot);
-            }
-        }
-    }
+  }
 }

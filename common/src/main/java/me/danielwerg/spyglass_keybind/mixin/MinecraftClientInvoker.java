@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(Minecraft.class)
 public interface MinecraftClientInvoker {
 
-    @Accessor("rightClickDelay")
-    int getItemUseCooldown();
+  @Accessor("rightClickDelay")
+  int getItemUseCooldown();
 
 }

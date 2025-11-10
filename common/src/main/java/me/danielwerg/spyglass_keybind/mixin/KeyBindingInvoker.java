@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(KeyMapping.class)
 public interface KeyBindingInvoker {
 
-    @Invoker("release")
-    void invokeReset();
+  @Invoker("release")
+  void invokeReset();
 
 }

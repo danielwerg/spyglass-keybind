@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Extracts changelog header for specific version
+
+version=$1
+if [ -z "$version" ]; then
+  echo "no version"
+  exit
+fi
+
+cat ./changelog.md | mdq --link-format keep --no-br "# ^'${version}'"

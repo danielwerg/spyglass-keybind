@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# readme for mod pages like modrinth
+
+cp ./readme.md ./readme-modpage.md
+
+for key in "MODRINTH_BADGE" "BUILD"; do
+  python ./scripts/insert-between.py --name "$key" \
+    --file ./readme-modpage.md --content ""
+done
+
+# delete comments and remove extra new lines
+cat ./readme-modpage.md \
+  | sd "<!-- .* --><!-- .* -->\n?" "" \
+  | awk '/./ { e=0 } /^$/ { e += 1 } e <= 1' \
+  | sponge ./readme-modpage.md
+
+# replace relative paths
+# https://codeberg.org/danielwerg/spyglass-keybind/media/branch/master
+githost_base="https\:\/\/raw\.githubusercontent.com\/danielwerg\/spyglass\-keybind\/master"
+sed "s/\.\/gallery/${githost_base}\/gallery/" -i ./readme-modpage.md

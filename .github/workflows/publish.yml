@@ -89,9 +89,6 @@ jobs:
           version: "${{env.VERSION}}+mc${{env.MINECRAFT_BASE_VERSION}}+fabric"
           version-type: release
           changelog-file: changelog.md
-          dependencies: |
-            trinkets(optional)
-            accessories(recommended)
 
           loaders: "fabric"
           game-versions: "${{env.MINECRAFT_VERSION}}"
