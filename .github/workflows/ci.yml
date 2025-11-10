@@ -1,6 +1,16 @@
 name: Build Spyglass Keybind dev
 
-on: [push]
+on:
+  push:
+    paths:
+      - "common/**"
+      - "fabric/**"
+      - "gradle/**"
+      - "build.gradle"
+      - "gradle.properties"
+      - "gradlew"
+      - "gradlew.bat"
+      - "settings.gradle"
 
 jobs:
   build:
